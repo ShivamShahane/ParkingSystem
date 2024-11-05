@@ -9,6 +9,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         initParkingLot(scanner);
         while (true) {
+        	System.out.println();
+        	System.out.println("Enter 1 to 5 digit to choose one of the following option:");
             System.out.println("1. Add Vehicle\n2. Remove Vehicle\n3. Check Availability\n4. Display Status\n5. Exit");
             int choice = scanner.nextInt();
             scanner.nextLine(); 

@@ -28,24 +28,16 @@ public class ParkingLot {
             Vehicle vehicle = floor.removeVehicle(registrationNumber);
             if (vehicle != null) {
                 Duration duration = Duration.between(vehicle.getEntryTime(), LocalDateTime.now());
-                long totalMinutes = duration.toMinutes(); // Get total minutes parked
+                long hours = duration.toHours(); 
+
                 
-                int cost;
-                if (totalMinutes <= 60) {
-                    cost = 10; 
-                } else if (totalMinutes <= 120) {
-                    cost = 20; 
-                } else {
-                    
-                    long additionalHours = (totalMinutes - 120) / 60;
-                    cost = 20 + (int)(additionalHours + 1) * 10; 
-                }
-                
+                int cost = costStrategy.calculateCost(vehicle.getType(), hours);
+
                 System.out.printf("Vehicle removed: %s. Total cost: Rs.%d%n", vehicle.getRegistrationNumber(), cost);
                 return vehicle; 
             }
         }
-        return null; 
+        return null; // Vehicle not found
     }
 
     public int checkAvailability(String vehicleType) {
